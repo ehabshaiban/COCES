@@ -1,0 +1,80 @@
+{% extends "layouts.master" %}
+
+{% block content %}
+<div class="container py-8">
+  <nav class="mb-6">
+    <salla-breadcrumb></salla-breadcrumb>
+  </nav>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+    <div class="rounded-3xl overflow-hidden border border-[var(--line)] bg-[var(--bg-card)]">
+      <salla-products-gallery product="{{ product.id }}"></salla-products-gallery>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      {% if product.brand %}
+        <span class="chip chip--line w-fit">{{ product.brand.name }}</span>
+      {% endif %}
+
+      <h1 class="t-section">{{ product.name }}</h1>
+
+      {% if product.rating %}
+        <div class="pcard__rate">
+          <span class="stars">★★★★★</span>
+          <span>{{ product.rating.stars }} ({{ product.rating.count }})</span>
+        </div>
+      {% endif %}
+
+      <div class="flex items-baseline gap-3">
+        {% if product.is_on_sale %}
+          <b class="text-2xl font-extrabold text-[var(--terra)]">{{ product.sale_price | money }}</b>
+          <s class="text-[var(--ink-soft)]">{{ product.regular_price | money }}</s>
+        {% else %}
+          <b class="text-2xl font-extrabold text-[var(--terra)]">{{ product.price | money }}</b>
+        {% endif %}
+      </div>
+
+      <div class="text-[var(--ink-soft)] text-sm leading-relaxed">
+        {{ product.description | raw }}
+      </div>
+
+      <form class="form product-form mt-2" enctype="multipart/form-data" method="post" onsubmit="return salla.form.onSubmit('cart.addItem', event)">
+        <input type="hidden" name="id" value="{{ product.id }}">
+
+        {% include 'pages.partials.product.options' %}
+
+        <div class="flex flex-wrap items-center gap-3 mt-5">
+          <salla-quantity-input max="{{ product.max_quantity }}" value="1" name="quantity"></salla-quantity-input>
+
+          <salla-add-product-button
+            product-id="{{ product.id }}"
+            product-status="{{ product.status }}"
+            product-type="{{ product.type }}"
+            fill="solid"
+            size="large"
+            class="flex-1">
+            {{ product.add_to_cart_label }}
+          </salla-add-product-button>
+
+          <salla-button shape="icon" fill="outline" onclick="salla.wishlist.toggle({{ product.id }})" aria-label="Wishlist">
+            <i class="sicon-heart"></i>
+          </salla-button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="mt-14">
+    <salla-comments item-id="{{ product.id }}" type="product"></salla-comments>
+  </div>
+
+  <div class="mt-14">
+    <h2 class="t-section mb-6">{{ trans('pages.products.similar_products') }}</h2>
+    <salla-products-slider source="related" source-value="{{ product.id }}" limit="8"></salla-products-slider>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  <script defer src="{{ 'product.js' | asset }}"></script>
+{% endblock %}

@@ -1,0 +1,53 @@
+<article class="pcard" data-pid="{{ product.id }}">
+  <div class="pcard__media">
+    {% if product.promotion_title %}
+      <span class="badge badge--sale">{{ product.promotion_title }}</span>
+    {% elseif product.is_out_of_stock %}
+      <span class="badge badge--best">{{ trans('pages.products.out_of_stock') }}</span>
+    {% endif %}
+
+    <salla-button
+      shape="icon"
+      fill="none"
+      aria-label="Wishlist"
+      class="pcard__wish {{ product.is_in_wishlist ? 'is-on' : '' }}"
+      onclick="salla.wishlist.toggle({{ product.id }})">
+      <i class="sicon-heart"></i>
+    </salla-button>
+
+    <a href="{{ product.url }}">
+      <img src="{{ product.image.url }}" alt="{{ product.image.alt | default(product.name) }}" loading="lazy">
+    </a>
+  </div>
+
+  <div class="pcard__body">
+    {% if product.rating %}
+      <div class="pcard__rate">
+        <span class="stars">★</span> {{ product.rating.stars }} ({{ product.rating.count }})
+      </div>
+    {% endif %}
+
+    <h3 class="pcard__name">
+      <a href="{{ product.url }}">{{ product.name }}</a>
+    </h3>
+
+    <div class="pcard__price">
+      {% if product.is_on_sale %}
+        <b>{{ product.sale_price | money }}</b>
+        <s>{{ product.regular_price | money }}</s>
+      {% else %}
+        <b>{{ product.price | money }}</b>
+      {% endif %}
+    </div>
+
+    <salla-add-product-button
+      product-id="{{ product.id }}"
+      product-status="{{ product.status }}"
+      product-type="{{ product.type }}"
+      fill="solid"
+      width="wide"
+      class="mt-3">
+      {{ product.add_to_cart_label }}
+    </salla-add-product-button>
+  </div>
+</article>

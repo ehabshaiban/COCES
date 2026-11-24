@@ -1,0 +1,93 @@
+{% set annc = theme.settings.get('announcement_text') %}
+{% if annc %}
+  <div class="annc" role="status">
+    <div class="container py-2 text-center text-xs md:text-sm font-bold">
+      {{ annc }}
+    </div>
+  </div>
+{% endif %}
+
+<header class="site-header" id="siteHeader">
+  <div class="header-top">
+    <div class="container flex items-center justify-between gap-4">
+      <span class="header-top__msg">
+        <i class="sicon-shipping-fast text-base"></i>
+        <span>{{ store.description | striptags | slice(0, 70) }}</span>
+      </span>
+
+      <div class="ht-actions">
+        {% if store.is_multilingual or store.is_multicurrency %}
+          <button type="button" class="ht-btn" onclick="salla.event.dispatch('localization::open')">
+            <span>{{ user.language.code == 'ar' ? 'EN' : 'عربي' }} · {{ user.currency.symbol }}</span>
+          </button>
+        {% endif %}
+
+        {% if store.contacts.mobile %}
+          <a class="ht-btn" href="tel:{{ store.contacts.mobile }}">
+            <i class="sicon-phone"></i>
+            <span>{{ store.contacts.mobile }}</span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="container header-main">
+    <a class="brand" href="{{ store.url }}" aria-label="{{ store.name }}">
+      <img src="{{ store.logo }}" alt="{{ store.name }}" class="h-11 w-auto object-contain">
+      <span class="brand__name">
+        <b>{{ store.name }}</b>
+        <span class="latin-logo">COOKIES LINO</span>
+      </span>
+    </a>
+
+    <nav class="main-nav" aria-label="{{ trans('blocks.header.main_menu') }}">
+      <salla-menu source="header"></salla-menu>
+    </nav>
+
+    <div class="header-actions">
+      <button type="button"
+              class="icon-btn"
+              onclick="salla.event.dispatch('search::open')"
+              aria-label="{{ trans('blocks.header.search') }}">
+        <i class="sicon-search text-xl"></i>
+      </button>
+
+      <a href="{{ link('wishlist') }}" class="icon-btn" aria-label="{{ trans('pages.profile.wishlist') }}">
+        <i class="sicon-heart text-xl"></i>
+        <span class="count" id="linoWishCount">{{ user.wishlist_count ?: '' }}</span>
+      </a>
+
+      {% if user.type == 'user' %}
+        <salla-user-menu avatar-only></salla-user-menu>
+      {% else %}
+        <button type="button"
+                class="icon-btn"
+                onclick="salla.event.dispatch('login::open')"
+                aria-label="{{ trans('blocks.header.login') }}">
+          <i class="sicon-user text-xl"></i>
+        </button>
+      {% endif %}
+
+      {% if theme.settings.get('enable_dark_mode_toggle', true) %}
+        <button type="button" class="icon-btn" id="themeToggle" aria-label="تبديل الوضع الليلي">
+          <i class="sicon-moon text-xl" id="themeIcon"></i>
+        </button>
+      {% endif %}
+
+      <salla-cart-summary class="ms-1">
+        <i slot="icon" class="sicon-shopping-bag text-xl"></i>
+      </salla-cart-summary>
+    </div>
+  </div>
+</header>
+
+<nav class="bnav" aria-label="Mobile Navigation">
+  <a href="{{ store.url }}"><i class="sicon-home text-lg"></i><span>{{ trans('common.home') | default('الرئيسية') }}</span></a>
+  <a href="{{ link('products') }}"><i class="sicon-grid text-lg"></i><span>{{ trans('common.products') | default('المتجر') }}</span></a>
+  <a href="{{ link('wishlist') }}"><i class="sicon-heart text-lg"></i><span>{{ trans('pages.profile.wishlist') | default('المفضلة') }}</span></a>
+  <a href="{{ link('cart') }}"><i class="sicon-shopping-bag text-lg"></i><span>{{ trans('pages.cart.title') | default('السلة') }}</span></a>
+  <button type="button" onclick="{{ user.type == 'user' ? "window.location.href='" ~ link('profile') ~ "'" : "salla.event.dispatch('login::open')" }}">
+    <i class="sicon-user text-lg"></i><span>{{ trans('common.account') | default('حسابي') }}</span>
+  </button>
+</nav>

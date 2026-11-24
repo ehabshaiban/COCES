@@ -1,0 +1,42 @@
+<footer class="site-footer" id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <a href="{{ store.url }}" class="inline-flex items-center gap-3 mb-3">
+          <img src="{{ store.logo }}" alt="{{ store.name }}" class="h-12 w-auto object-contain">
+          <span class="brand__name text-white">
+            <b style="font-size:1.3rem">{{ store.name }}</b>
+            <span class="latin-logo" style="color:var(--butter)">COOKIES LINO</span>
+          </span>
+        </a>
+        <p>{{ store.description | raw }}</p>
+        <salla-social></salla-social>
+      </div>
+
+      <div class="footer-col">
+        <h3>{{ trans('blocks.footer.pages_links') }}</h3>
+        <salla-menu source="footer"></salla-menu>
+      </div>
+
+      <div class="footer-col">
+        <h3>{{ trans('blocks.footer.contact') }}</h3>
+        <salla-contacts></salla-contacts>
+      </div>
+
+      <div class="footer-col">
+        <h3>{{ trans('blocks.footer.apps') | default('تطبيقات المتجر') }}</h3>
+        <salla-apps-icons></salla-apps-icons>
+        {% if store.settings.tax.number %}
+          <p class="mt-4 text-xs opacity-80">
+            {{ trans('common.tax_number') }}: {{ store.settings.tax.number }}
+          </p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {{ "now" | date("Y") }} {{ store.name }} — جميع الحقوق محفوظة</span>
+      <salla-payments></salla-payments>
+    </div>
+  </div>
+</footer>

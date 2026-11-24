@@ -1,0 +1,329 @@
+{
+  "name": {
+    "ar": "كوكيز لينو",
+    "en": "Cookies Lino"
+  },
+  "version": "1.0.0",
+  "repository": "https://github.com/SallaApp/theme-raed",
+  "author_email": "hello@cookieslino.com",
+  "support_url": "https://salla.dev",
+  "features": [
+    "breadcrumb",
+    "component-featured-products",
+    "component-fixed-banner",
+    "component-home-products",
+    "component-photos-slider",
+    "component-products-slider",
+    "component-testimonials"
+  ],
+  "settings": [
+    {
+      "id": "primary_color",
+      "type": "color",
+      "label": "اللون الأساسي (التيراكوتا)",
+      "value": "#B4552D",
+      "format": "string"
+    },
+    {
+      "id": "choco_color",
+      "type": "color",
+      "label": "لون الشوكولاتة الداكن",
+      "value": "#3B2314",
+      "format": "string"
+    },
+    {
+      "id": "announcement_text",
+      "type": "string",
+      "label": "شريط الإعلانات العلوي",
+      "value": "🚚 شحن مجاني للطلبات فوق 149 ر.س · 🔥 مخبوز طازج كل صباح · 🍫 شوكولاتة بلجيكية 54%"
+    },
+    {
+      "id": "free_shipping_threshold",
+      "type": "number",
+      "label": "الحد الأدنى للشحن المجاني (ر.س)",
+      "value": 149
+    },
+    {
+      "id": "whatsapp_number",
+      "type": "string",
+      "label": "رقم الواتساب للطلبات الخاصة (بدون +)",
+      "value": "966500000000"
+    },
+    {
+      "id": "enable_dark_mode_toggle",
+      "type": "boolean",
+      "label": "تفعيل زر تبديل الوضع الليلي",
+      "value": true
+    }
+  ],
+  "components": [
+    {
+      "key": "lino-hero",
+      "title": "هيرو كوكيز لينو الرئيسي",
+      "icon": "sicon-star",
+      "path": "home.lino-hero",
+      "fields": [
+        {
+          "id": "kicker",
+          "type": "string",
+          "label": "الشارة العلوية",
+          "value": "🍪 مخبوز طازج يوميًا"
+        },
+        {
+          "id": "title_prefix",
+          "type": "string",
+          "label": "السطر الأول من العنوان",
+          "value": "كوكيز حرفي فاخر،"
+        },
+        {
+          "id": "title_highlight",
+          "type": "string",
+          "label": "الكلمة المميزة في العنوان",
+          "value": "بشوكولاتة حقيقية"
+        },
+        {
+          "id": "subtitle",
+          "type": "textarea",
+          "label": "النص التعريفي",
+          "value": "في كوكيز لينو نخبز كل قطعة يدويًا كل صباح: زبدة فرنسية، شوكولاتة بلجيكية 54%، ووصفات صقلناها على مدى سنوات — لتصل إليك دافئة، طرية، ولا تُنسى."
+        },
+        {
+          "id": "hero_image",
+          "type": "image",
+          "label": "صورة الهيرو الرئيسية"
+        },
+        {
+          "id": "stamp_text",
+          "type": "string",
+          "label": "نص الختم الدائري",
+          "value": "مخبوز اليوم 7:00 ص"
+        },
+        {
+          "id": "cta_primary_text",
+          "type": "string",
+          "label": "نص الزر الأول",
+          "value": "تسوّق الآن"
+        },
+        {
+          "id": "cta_primary_url",
+          "type": "string",
+          "label": "رابط الزر الأول",
+          "value": "/products"
+        },
+        {
+          "id": "cta_secondary_text",
+          "type": "string",
+          "label": "نص الزر الثاني",
+          "value": "اكتشف البوكسات"
+        },
+        {
+          "id": "cta_secondary_url",
+          "type": "string",
+          "label": "رابط الزر الثاني",
+          "value": "/categories"
+        }
+      ]
+    },
+    {
+      "key": "lino-categories",
+      "title": "أقسام كوكيز لينو الدائرية",
+      "icon": "sicon-grid",
+      "path": "home.lino-categories",
+      "fields": [
+        {
+          "id": "kicker",
+          "type": "string",
+          "label": "العنوان الفرعي",
+          "value": "الأقسام"
+        },
+        {
+          "id": "title",
+          "type": "string",
+          "label": "العنوان الرئيسي",
+          "value": "اختر مذاقك المفضل"
+        },
+        {
+          "id": "subtitle",
+          "type": "string",
+          "label": "الوصف",
+          "value": "من الكلاسيك الذهبي إلى المحشي الفاخر — لكل مزاج كوكيز خاص به."
+        },
+        {
+          "id": "categories",
+          "type": "category",
+          "label": "اختر التصنيفات المعروضة",
+          "is_multiple": true
+        }
+      ]
+    },
+    {
+      "key": "lino-collection",
+      "title": "كولكشن لينو التحريري",
+      "icon": "sicon-layout-grid",
+      "path": "home.lino-collection",
+      "fields": [
+        {
+          "id": "kicker",
+          "type": "string",
+          "label": "العنوان الفرعي",
+          "value": "كولكشن لينو"
+        },
+        {
+          "id": "title",
+          "type": "string",
+          "label": "العنوان الرئيسي",
+          "value": "قِطع تستحق التجربة"
+        },
+        {
+          "id": "subtitle",
+          "type": "string",
+          "label": "الوصف",
+          "value": "تنسيقات مختارة بعناية من مخبزنا — تصفحها كما تتصفح مجلة."
+        },
+        {
+          "id": "tiles",
+          "type": "collection",
+          "label": "بطاقات الكولكشن (حتى 4 بطاقات)",
+          "fields": [
+            {
+              "id": "tag",
+              "type": "string",
+              "label": "الشارة"
+            },
+            {
+              "id": "title",
+              "type": "string",
+              "label": "العنوان"
+            },
+            {
+              "id": "subtitle",
+              "type": "string",
+              "label": "الوصف المختصر"
+            },
+            {
+              "id": "image",
+              "type": "image",
+              "label": "الصورة"
+            },
+            {
+              "id": "url",
+              "type": "string",
+              "label": "الرابط"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "lino-story",
+      "title": "قصتنا — من فرننا إلى طاولتك",
+      "icon": "sicon-fire",
+      "path": "home.lino-story",
+      "fields": [
+        {
+          "id": "title",
+          "type": "string",
+          "label": "العنوان",
+          "value": "من فرننا إلى طاولتك"
+        },
+        {
+          "id": "description",
+          "type": "textarea",
+          "label": "نص القصة",
+          "value": "بدأت حكاية لينو من مطبخ صغير وشغف كبير. اليوم نخبز آلاف القطع يوميًا بنفس الوصفة الأولى: مكونات صادقة، يدٌ صبورة، ولا اختصارات — أبدًا."
+        },
+        {
+          "id": "story_image",
+          "type": "image",
+          "label": "صورة المخبز"
+        },
+        {
+          "id": "stat_years",
+          "type": "string",
+          "label": "إحصائية الخبرة",
+          "value": "+15"
+        },
+        {
+          "id": "stat_monthly",
+          "type": "string",
+          "label": "إحصائية الإنتاج الشهري",
+          "value": "40K"
+        },
+        {
+          "id": "stat_rating",
+          "type": "string",
+          "label": "التقييم",
+          "value": "4.9★"
+        }
+      ]
+    },
+    {
+      "key": "lino-offer-banner",
+      "title": "بانر العرض والعداد التنازلي",
+      "icon": "sicon-discount",
+      "path": "home.lino-offer-banner",
+      "fields": [
+        {
+          "id": "chip",
+          "type": "string",
+          "label": "الشارة",
+          "value": "عرض نهاية الأسبوع"
+        },
+        {
+          "id": "title",
+          "type": "string",
+          "label": "عنوان العرض",
+          "value": "خصم 20% على جميع البوكسات"
+        },
+        {
+          "id": "coupon_code",
+          "type": "string",
+          "label": "كود الخصم",
+          "value": "LINO20"
+        },
+        {
+          "id": "end_date",
+          "type": "datetime",
+          "label": "تاريخ انتهاء العرض"
+        },
+        {
+          "id": "cta_url",
+          "type": "string",
+          "label": "رابط زر الطلب",
+          "value": "/offers"
+        }
+      ]
+    },
+    {
+      "key": "lino-faq",
+      "title": "الأسئلة الشائعة",
+      "icon": "sicon-help",
+      "path": "home.lino-faq",
+      "fields": [
+        {
+          "id": "title",
+          "type": "string",
+          "label": "العنوان",
+          "value": "لديك سؤال؟ الإجابة هنا 👇"
+        },
+        {
+          "id": "items",
+          "type": "collection",
+          "label": "الأسئلة والأجوبة",
+          "fields": [
+            {
+              "id": "question",
+              "type": "string",
+              "label": "السؤال"
+            },
+            {
+              "id": "answer",
+              "type": "textarea",
+              "label": "الإجابة"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

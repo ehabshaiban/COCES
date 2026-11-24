@@ -1,0 +1,33 @@
+<section class="section" id="collection" style="padding-block-start:0">
+  <div class="container">
+    <header class="section-head section-head--center">
+      {% if component.kicker %}
+        <span class="t-kicker">{{ component.kicker }}</span>
+      {% endif %}
+      <h2 class="t-section">{{ component.title }}</h2>
+      {% if component.subtitle %}
+        <p class="section-sub">{{ component.subtitle }}</p>
+      {% endif %}
+    </header>
+
+    <div class="coll">
+      {% for tile in component.tiles | slice(0, 4) %}
+        <a class="coll__tile coll__tile--{{ loop.index }}" href="{{ tile.url | default('/products') }}">
+          {% if tile.image %}
+            <img src="{{ tile.image }}" alt="{{ tile.title }}" loading="lazy">
+          {% endif %}
+          {% if tile.tag %}
+            <span class="coll__tag">{{ tile.tag }}</span>
+          {% endif %}
+          <div class="coll__cap">
+            <h3>{{ tile.title }}</h3>
+            {% if tile.subtitle %}
+              <p>{{ tile.subtitle }}</p>
+            {% endif %}
+            <span class="coll__link">{{ trans('lino.explore') }} <i class="sicon-arrow-left rtl:rotate-0 ltr:rotate-180"></i></span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

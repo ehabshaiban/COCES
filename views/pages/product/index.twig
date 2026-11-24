@@ -1,0 +1,29 @@
+{% extends "layouts.master" %}
+
+{% block content %}
+<div class="container py-8">
+  <salla-breadcrumb class="mb-6"></salla-breadcrumb>
+
+  <header class="section-head flex flex-wrap items-center justify-between gap-4">
+    <div>
+      <h1 class="t-section">{{ page.title }}</h1>
+      {% if category.description %}
+        <p class="section-sub">{{ category.description | raw }}</p>
+      {% endif %}
+    </div>
+
+    {% if sort_options | length %}
+      <div class="flex items-center gap-2">
+        <label for="product-filter" class="text-sm font-bold">{{ trans('pages.categories.sorting') }}</label>
+        <select id="product-filter" class="rounded-full border border-[var(--line)] bg-[var(--bg-card)] px-4 py-2 text-sm font-bold">
+          {% for sort in sort_options %}
+            <option value="{{ sort.id }}" {{ sort.is_selected ? 'selected' : '' }}>{{ sort.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    {% endif %}
+  </header>
+
+  <salla-products-list source="{{ page.slug }}" source-value="{{ page.id }}"></salla-products-list>
+</div>
+{% endblock %}

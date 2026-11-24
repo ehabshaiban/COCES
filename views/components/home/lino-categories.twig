@@ -1,0 +1,30 @@
+<section class="section" id="categories">
+  <div class="container">
+    <header class="section-head section-head--center">
+      {% if component.kicker %}
+        <span class="t-kicker">{{ component.kicker }}</span>
+      {% endif %}
+      <h2 class="t-section">{{ component.title }}</h2>
+      {% if component.subtitle %}
+        <p class="section-sub">{{ component.subtitle }}</p>
+      {% endif %}
+    </header>
+
+    <div class="cats">
+      {% set cats = component.categories | length ? component.categories : store.categories %}
+      {% for cat in cats %}
+        <a class="cat" href="{{ cat.url }}">
+          {% if cat.image %}
+            <img class="cat__img" src="{{ cat.image }}" alt="{{ cat.name }}" loading="lazy">
+          {% else %}
+            <div class="cat__img grid place-items-center text-3xl bg-amber-50">🍪</div>
+          {% endif %}
+          <span class="cat__name">{{ cat.name }}</span>
+          {% if cat.products_count %}
+            <span class="cat__sub">{{ cat.products_count }} {{ trans('common.products') }}</span>
+          {% endif %}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

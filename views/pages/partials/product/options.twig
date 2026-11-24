@@ -1,0 +1,38 @@
+{% if product.options | length %}
+  <div class="product-options flex flex-col gap-4 my-4">
+    {% for option in product.options %}
+      <div class="option-group">
+        <label class="block font-extrabold text-sm mb-1.5">
+          {{ option.name }}
+          {% if option.required %}<span class="text-red-600">*</span>{% endif %}
+        </label>
+
+        {% if option.type == 'select' %}
+          <select name="options[{{ option.id }}]"
+                  class="w-full rounded-xl border border-[var(--line)] bg-[var(--bg-card)] px-4 py-2.5 text-sm"
+                  {{ option.required ? 'required' : '' }}>
+            <option value="">{{ option.placeholder | default(trans('pages.products.select_option')) }}</option>
+            {% for detail in option.details %}
+              <option value="{{ detail.id }}">
+                {{ detail.name }}
+                {% if detail.additional_price %} (+{{ detail.additional_price | money }}){% endif %}
+              </option>
+            {% endfor %}
+          </select>
+        {% elseif option.type == 'text' %}
+          <input type="text"
+                 name="options[{{ option.id }}]"
+                 placeholder="{{ option.placeholder }}"
+                 class="w-full rounded-xl border border-[var(--line)] bg-[var(--bg-card)] px-4 py-2.5 text-sm"
+                 {{ option.required ? 'required' : '' }}>
+        {% elseif option.type == 'textarea' %}
+          <textarea name="options[{{ option.id }}]"
+                    rows="3"
+                    placeholder="{{ option.placeholder }}"
+                    class="w-full rounded-xl border border-[var(--line)] bg-[var(--bg-card)] px-4 py-2.5 text-sm"
+                    {{ option.required ? 'required' : '' }}></textarea>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

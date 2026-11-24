@@ -1,0 +1,22 @@
+<section class="section" id="faq">
+  <div class="container">
+    <header class="section-head section-head--center">
+      <span class="t-kicker">{{ trans('common.help') | default('مساعدة') }}</span>
+      <h2 class="t-section">{{ component.title }}</h2>
+    </header>
+
+    <div class="faq">
+      {% for item in component.items %}
+        <div class="faq__item">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span>{{ item.question }}</span>
+            <i class="sicon-add text-lg"></i>
+          </button>
+          <div class="faq__a" role="region">
+            <p>{{ item.answer }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

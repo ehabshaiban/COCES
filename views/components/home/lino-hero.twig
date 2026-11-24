@@ -1,0 +1,46 @@
+<section class="hero" id="top">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      {% if component.kicker %}
+        <span class="chip chip--terra hero__kicker">{{ component.kicker }}</span>
+      {% endif %}
+
+      <h1 class="hero__title">
+        {{ component.title_prefix }}<br>
+        <em>{{ component.title_highlight }}</em>
+      </h1>
+
+      {% if component.subtitle %}
+        <p class="hero__lead">{{ component.subtitle }}</p>
+      {% endif %}
+
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="{{ component.cta_primary_url | default('/products') }}">
+          <span>{{ component.cta_primary_text | default(trans('lino.shop_now')) }}</span>
+          <i class="sicon-arrow-left rtl:rotate-0 ltr:rotate-180"></i>
+        </a>
+
+        {% if component.cta_secondary_text %}
+          <a class="btn btn--ghost" href="{{ component.cta_secondary_url | default('/categories') }}">
+            {{ component.cta_secondary_text }}
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="hero__trust">
+        <span class="hero__stars" aria-hidden="true">★★★★★</span>
+        <small>4.9 / 5 — {{ store.name }}</small>
+      </div>
+    </div>
+
+    <div class="hero__media">
+      {% if component.hero_image %}
+        <img class="hero__img" src="{{ component.hero_image }}" alt="{{ component.title_prefix }}" loading="eager">
+      {% endif %}
+
+      {% if component.stamp_text %}
+        <div class="hero__stamp" aria-hidden="true">{{ component.stamp_text }}</div>
+      {% endif %}
+    </div>
+  </div>
+</section>

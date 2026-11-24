@@ -1,0 +1,33 @@
+<section class="section story" id="story">
+  <div class="container story__grid">
+    <div class="story__media">
+      <span class="story__frame" aria-hidden="true"></span>
+      {% if component.story_image %}
+        <img class="story__img" src="{{ component.story_image }}" alt="{{ component.title }}" loading="lazy">
+      {% endif %}
+      <div class="story__badge">
+        <i class="sicon-fire"></i>
+        <span>{{ trans('lino.fresh_daily') }}</span>
+      </div>
+    </div>
+
+    <div class="story__copy">
+      <span class="t-kicker">{{ trans('lino.our_story') }}</span>
+      <h2 class="t-section my-3">{{ component.title }}</h2>
+      <p class="section-sub">{{ component.description }}</p>
+
+      <ul class="story__list">
+        <li><i class="sicon-check text-green-700 mt-1"></i><span>زبدة فرنسية طبيعية 100%<small>بدون زيوت مهدرجة أو سمن صناعي</small></span></li>
+        <li><i class="sicon-check text-green-700 mt-1"></i><span>شوكولاتة بلجيكية فاخرة 54% كاكاو<small>قطع حقيقية تذوب في كل قضمة</small></span></li>
+        <li><i class="sicon-check text-green-700 mt-1"></i><span>بدون مواد حافظة أو نكهات صناعية<small>صلاحيتنا قصيرة لأن مكوناتنا حقيقية</small></span></li>
+        <li><i class="sicon-check text-green-700 mt-1"></i><span>خَبز يومي على دفعات صغيرة<small>لن يصلك إلا كوكيز اليوم — دائمًا</small></span></li>
+      </ul>
+
+      <div class="story__stats">
+        <div><b>{{ component.stat_years | default('+15') }}</b><span>سنة خبرة في الخَبز</span></div>
+        <div><b>{{ component.stat_monthly | default('40K') }}</b><span>كوكيز نخبزها شهريًا</span></div>
+        <div><b>{{ component.stat_rating | default('4.9★') }}</b><span>متوسط تقييم عملائنا</span></div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,12 @@
+{
+  "lino": {
+    "fresh_daily": "Baked fresh daily",
+    "our_story": "Our Story",
+    "shop_now": "Shop Now",
+    "explore": "Explore",
+    "free_shipping_unlocked": "🎉 Congrats! You unlocked free shipping",
+    "free_shipping_remaining": "🚚 Add :amount more for free shipping",
+    "copy_coupon": "Copy Code",
+    "copied": "Coupon copied!"
+  }
+}

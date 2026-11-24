@@ -1,0 +1,34 @@
+<section class="section" id="offer">
+  <div class="container">
+    <div class="offer">
+      {% if component.chip %}
+        <span class="chip" style="background:rgba(255,255,255,.15);color:#fff">{{ component.chip }}</span>
+      {% endif %}
+
+      <h2>{{ component.title }}</h2>
+
+      {% if component.coupon_code %}
+        <p class="offer__sub">
+          استخدم كود الخصم
+          <button type="button"
+                  data-copy-coupon="{{ component.coupon_code }}"
+                  class="px-3 py-1 mx-1 rounded-full bg-white/20 font-extrabold hover:bg-white/30 transition">
+            {{ component.coupon_code }} 📋
+          </button>
+          عند إتمام الطلب.
+        </p>
+      {% endif %}
+
+      <div class="cd" data-lino-countdown="{{ component.end_date }}">
+        <div class="cd__cell"><span class="cd__num" data-cd="d">00</span><span class="cd__lbl">{{ trans('common.days') | default('يوم') }}</span></div>
+        <div class="cd__cell"><span class="cd__num" data-cd="h">00</span><span class="cd__lbl">{{ trans('common.hours') | default('ساعة') }}</span></div>
+        <div class="cd__cell"><span class="cd__num" data-cd="m">00</span><span class="cd__lbl">{{ trans('common.minutes') | default('دقيقة') }}</span></div>
+        <div class="cd__cell"><span class="cd__num" data-cd="s">00</span><span class="cd__lbl">{{ trans('common.seconds') | default('ثانية') }}</span></div>
+      </div>
+
+      <a class="btn btn--cream" href="{{ component.cta_url | default('/offers') }}">
+        {{ trans('lino.shop_now') }}
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,73 @@
+{% extends "layouts.master" %}
+
+{% block content %}
+<div class="container py-8">
+  <salla-breadcrumb class="mb-6"></salla-breadcrumb>
+  <h1 class="t-section mb-6">{{ trans('pages.cart.title') }}</h1>
+
+  {% set threshold = theme.settings.get('free_shipping_threshold', 149) %}
+  {% if cart.items | length and threshold > 0 %}
+    {% set remaining = threshold - cart.sub_total.amount %}
+    <div class="mb-6 p-4 rounded-2xl bg-[var(--cream)] text-[var(--choco)] font-extrabold text-sm text-center">
+      {% if remaining <= 0 %}
+        {{ trans('lino.free_shipping_unlocked') }}
+      {% else %}
+        {{ trans('lino.free_shipping_remaining', {'amount': remaining | money}) }}
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+    <div class="lg:col-span-2 flex flex-col gap-4">
+      {% for item in cart.items %}
+        <div class="p-4 rounded-2xl border border-[var(--line)] bg-[var(--bg-card)]">
+          <salla-cart-item item="{{ item | json_encode }}"></salla-cart-item>
+        </div>
+      {% else %}
+        <div class="cart-empty border-2 border-dashed border-[var(--line)] rounded-3xl">
+          <span>🍪</span>
+          <b>{{ trans('pages.cart.empty_cart') }}</b>
+          <div class="mt-4">
+            <a href="{{ link('products') }}" class="btn btn--primary">{{ trans('common.elements.back_home') }}</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if cart.items | length %}
+      <aside class="p-6 rounded-3xl border border-[var(--line)] bg-[var(--bg-soft)] flex flex-col gap-4">
+        <h2 class="font-extrabold text-lg">{{ trans('pages.cart.summary') }}</h2>
+
+        {% if store.settings.cart.apply_coupon_enabled %}
+          <salla-coupon></salla-coupon>
+        {% endif %}
+
+        <div class="cart-sum">
+          <span>{{ trans('pages.cart.items_total') }}</span>
+          <b>{{ cart.sub_total | money }}</b>
+        </div>
+
+        {% if cart.total_discount %}
+          <div class="cart-sum text-green-700">
+            <span>{{ trans('pages.cart.discount') }}</span>
+            <b>- {{ cart.total_discount | money }}</b>
+          </div>
+        {% endif %}
+
+        <div class="cart-sum cart-sum--total">
+          <span>{{ trans('pages.cart.final_total') }}</span>
+          <b style="color:var(--terra)">{{ cart.total | money }}</b>
+        </div>
+
+        <salla-button id="cart-submit" loader-position="center" width="wide" class="btn--primary">
+          {{ trans('pages.cart.complete_order') }}
+        </salla-button>
+      </aside>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  <script defer src="{{ 'cart.js' | asset }}"></script>
+{% endblock %}

@@ -1,0 +1,12 @@
+{
+  "lino": {
+    "fresh_daily": "يُخبز أمامك يوميًا",
+    "our_story": "قصتنا",
+    "shop_now": "تسوّق الآن",
+    "explore": "استكشف",
+    "free_shipping_unlocked": "🎉 مبروك! حصلت على شحن مجاني",
+    "free_shipping_remaining": "🚚 أضف منتجات بقيمة :amount للحصول على شحن مجاني",
+    "copy_coupon": "انسخ الكود",
+    "copied": "تم نسخ الكود!"
+  }
+}

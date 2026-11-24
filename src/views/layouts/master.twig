@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="{{ user.language.code }}" dir="{{ user.language.dir }}" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% hook 'head:start' %}
+  {% hook 'head' %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --choco: {{ theme.settings.get('choco_color', '#3B2314') }};
+      --terra: {{ theme.settings.get('primary_color', '#B4552D') }};
+      --color-primary: var(--terra);
+      --color-primary-d: #8F3E1D;
+      --color-primary-l: #F2E4C8;
+      --font-main: 'Almarai', system-ui, sans-serif;
+    }
+  </style>
+
+  <link rel="stylesheet" href="{{ 'app.css' | asset }}">
+  {% block styles %}{% endblock %}
+  {% hook 'head:end' %}
+</head>
+
+<body id="app" class="lino-store overflow-x-hidden">
+  {% hook 'body:start' %}
+
+  <noscript>
+    تحتاج لتفعيل JavaScript لتشغيل متجر {{ store.name }} بشكل كامل.
+  </noscript>
+
+  <div class="app-inner flex flex-col min-h-screen">
+    {% component 'header.header' %}
+
+    <main id="mainContent" class="flex-1">
+      {% block content %}{% endblock %}
+    </main>
+
+    {% component 'footer.footer' %}
+  </div>
+
+  <div class="fab-col">
+    {% set wa = theme.settings.get('whatsapp_number', '966500000000') %}
+    {% if wa %}
+      <a class="fab fab--wa" href="https://wa.me/{{ wa }}" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <i class="sicon-whatsapp text-xl"></i>
+      </a>
+    {% endif %}
+    <button class="fab fab--top" id="fabTop" type="button" aria-label="{{ trans('common.back_to_top') | default('العودة للأعلى') }}">
+      <i class="sicon-keyboard_arrow_up text-xl"></i>
+    </button>
+  </div>
+
+  {% hook 'body:end' %}
+
+  <salla-offer-modal></salla-offer-modal>
+  <salla-search></salla-search>
+
+  {% if user.type == 'guest' %}
+    <salla-login-modal></salla-login-modal>
+  {% endif %}
+
+  {% if store.is_multilingual or store.is_multicurrency %}
+    <salla-localization-modal></salla-localization-modal>
+  {% endif %}
+
+  <script defer src="{{ 'app.js' | asset }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
